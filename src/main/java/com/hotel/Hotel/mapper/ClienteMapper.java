@@ -37,8 +37,8 @@ public interface ClienteMapper {
                 .map(r -> new ReservaItemResponse(
                         r.getId(),
                         r.getHabitacion() != null ? r.getHabitacion().getNumero() : null,
-                        r.getPeriodo() != null ? r.getPeriodo().getFechaInicio() : null,
-                        r.getPeriodo() != null ? r.getPeriodo().getFechaFin() : null,
+                        r.getPeriodo() != null ? r.getPeriodo().fechaInicio().toLocalDate() : null,
+                        r.getPeriodo() != null ? r.getPeriodo().fechaFin().toLocalDate() : null,
                         r.getEstado(),
                         r.getCostoTotal()))
                 .toList();
