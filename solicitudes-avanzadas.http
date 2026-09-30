@@ -1,0 +1,31 @@
+### Variables globales
+@baseUrl = http://localhost:8080/api
+@clienteId = 123e4567-e89b-12d3-a456-426614174000
+
+### 1. Creación de Suite Presidencial
+POST {{baseUrl}}/habitaciones/suites
+Content-Type: application/json
+
+{
+  "numero": "P05-501",
+  "precioPorNoche": 350.0,
+  "capacidadMaxima": 2,
+  "jacuzziPrivado": true,
+  "incluyeMayordomo": true
+}
+
+### 2. Consulta Polimórfica (Muestra el campo "tipo": "ESTANDAR" / "SUITE")
+GET {{baseUrl}}/habitaciones
+Accept: application/json
+
+### 3. Resumen Ejecutivo del Cliente (Totales calculados sin desbordamiento)
+GET {{baseUrl}}/clientes/{{clienteId}}/resumen
+Accept: application/json
+
+### 4. Actualización Selectiva (HTTP PATCH)
+PATCH {{baseUrl}}/clientes/{{clienteId}}
+Content-Type: application/json
+
+{
+  "nombre": "Nuevo Nombre Modificado"
+}

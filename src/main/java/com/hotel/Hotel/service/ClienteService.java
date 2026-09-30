@@ -1,8 +1,10 @@
 package com.hotel.Hotel.service;
 
 import com.hotel.Hotel.domain.Cliente;
+import com.hotel.Hotel.dto.request.ActualizarClienteRequest;
 import com.hotel.Hotel.dto.request.CrearClienteRequest;
 import com.hotel.Hotel.dto.response.ClienteResponse;
+import com.hotel.Hotel.dto.response.ClienteResumenResponse;
 import com.hotel.Hotel.mapper.ClienteMapper;
 import com.hotel.Hotel.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,27 @@ public class ClienteService {
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + id));
         return clienteMapper.toResponse(cliente);
+    }
+
+    // --- AÑADIR PARA TAREA 2: Resumen Ejecutivo del Cliente ---
+    @Transactional(readOnly = true)
+    public ClienteResumenResponse obtenerResumen(UUID id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + id));
+        return clienteMapper.toResumenResponse(cliente);
+    }
+
+    // --- AÑADIR PARA TAREA 3: Actualización Parcial Segura (PATCH) ---
+    @Transactional
+    public ClienteResponse actualizarParcial(UUID id, ActualizarClienteRequest request) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + id));
+
+        // MapStruct aplica únicamente los campos no nulos sobre la entidad recuperada
+        // de la BD
+        clienteMapper.updateClienteFromDto(request, cliente);
+
+        Cliente guardado = clienteRepository.save(cliente);
+        return clienteMapper.toResponse(guardado);
     }
 }
