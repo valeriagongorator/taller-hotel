@@ -1,0 +1,223 @@
+{
+  "info": {
+    "name": "Hotel Spring Boot API",
+    "description": "Colección completa de endpoints para pruebas en Postman del sistema HotelSpringBoot",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "clienteId",
+      "value": "683e5bda-cf70-432b-b08d-d2e21da30bf9",
+      "type": "string"
+    },
+    {
+      "key": "habitacionId",
+      "value": "82a92bfe-b066-476a-8e80-cf53fedf1892",
+      "type": "string"
+    },
+    {
+      "key": "reservaId",
+      "value": "61fb9a6b-6002-49fc-8dd4-e9cc8388b951",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Habitaciones",
+      "item": [
+        {
+          "name": "1.1 Crear Suite Presidencial",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numero\": \"P05-502\",\n  \"precioPorNoche\": 350.0,\n  \"capacidadMaxima\": 2,\n  \"jacuzziPrivado\": true,\n  \"incluyeMayordomo\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/habitaciones/suites",
+              "host": ["{{baseUrl}}"],
+              "path": ["habitaciones", "suites"]
+            }
+          }
+        },
+        {
+          "name": "1.2 Crear Habitación Estándar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numero\": \"102\",\n  \"precioPorNoche\": 120.0,\n  \"capacidadMaxima\": 2,\n  \"camasIndividuales\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/habitaciones/estandares",
+              "host": ["{{baseUrl}}"],
+              "path": ["habitaciones", "estandares"]
+            }
+          }
+        },
+        {
+          "name": "1.3 Listar Habitaciones (Polimórfica)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/habitaciones",
+              "host": ["{{baseUrl}}"],
+              "path": ["habitaciones"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Clientes",
+      "item": [
+        {
+          "name": "2.1 Crear Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Carlos Rodriguez\",\n  \"email\": \"carlos@hotel.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clientes",
+              "host": ["{{baseUrl}}"],
+              "path": ["clientes"]
+            }
+          }
+        },
+        {
+          "name": "2.2 Listar Clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clientes",
+              "host": ["{{baseUrl}}"],
+              "path": ["clientes"]
+            }
+          }
+        },
+        {
+          "name": "2.3 Obtener Cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clientes/{{clienteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["clientes", "{{clienteId}}"]
+            }
+          }
+        },
+        {
+          "name": "2.4 Resumen Ejecutivo del Cliente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clientes/{{clienteId}}/resumen",
+              "host": ["{{baseUrl}}"],
+              "path": ["clientes", "{{clienteId}}", "resumen"]
+            }
+          }
+        },
+        {
+          "name": "2.5 Actualización Parcial (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Valeria Góngora Torres\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clientes/{{clienteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["clientes", "{{clienteId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Reservas",
+      "item": [
+        {
+          "name": "3.1 Crear Reserva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": \"{{clienteId}}\",\n  \"habitacionId\": \"{{habitacionId}}\",\n  \"fechaInicio\": \"2026-10-10T14:00:00\",\n  \"fechaFin\": \"2026-10-15T12:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservas",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservas"]
+            }
+          }
+        },
+        {
+          "name": "3.2 Listar Todas las Reservas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reservas",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservas"]
+            }
+          }
+        },
+        {
+          "name": "3.3 Obtener Reserva por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reservas/{{reservaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservas", "{{reservaId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

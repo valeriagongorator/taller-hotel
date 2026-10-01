@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: 5854e4ec-98b0-43ad-8434-68294b4c29ba
+
+localResources:
+  collections:
+    - ../Hotel_Postman_Collection.json
